@@ -1,5 +1,5 @@
 package cn.test13.cc;
-//TODO
+
 import java.util.Scanner;
 
 public class J1338 {
@@ -8,21 +8,25 @@ public class J1338 {
 	public static void main(String[] args) {
 		Scanner cn = new Scanner(System.in);
 		int n = cn.nextInt();
-		long startTime = System.currentTimeMillis();
 		solve(n);
+		
+		for(int i = 2;i<=n/2;i++) {
+			if(n%i==0) {
+				for(int j = 2;j<=n/2;j++) {
+					
+				}
+			}
+		}
 		System.out.println(total+1);
-		long endTime = System.currentTimeMillis();
-		System.out.println(endTime - startTime);
 		cn.close();
 	}
 	private static void solve(int n) {  
-	    if(n == 1) {  
-	        total+=2;  
+	    if(n<2) {   
 	        return ;  
 	    }  
-	    int i;  
-	    for(i = 2; i <= n/2+1; i++) {  
-	        if(n % i == 0) {  
+	    for(int i = 2; i <= n/2; i++) {  
+	        if(n % i == 0) { 
+	        	total++;
 	            solve(n / i);  
 	        }  
 	    }  
