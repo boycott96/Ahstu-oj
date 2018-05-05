@@ -3,36 +3,73 @@ package cn.Javaweb.cc;
 import java.util.Scanner;
 
 public class I {
+	private static final int MAX = 1000000;
+	private static int n;
+	private static int m;
+	private static int[] T;
+	private static int[] Coins;
+	private static int[][] c;
+	private static boolean[][] hasUsed;
+
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		
-		int[] t = new int[11];
-		int[] conins = new int[11];
-		while(sc.hasNext()) {
-			int n = sc.nextInt();
-			for(int i = 0;i<n;i++) {
-				t[i] = sc.nextInt();
-				conins[i] = sc.nextInt();
-			}
-			int m = sc.nextInt();
-			//int num =0;
-			int[] d = new int[21010];
-			for(int i = 1;i<=m;i++) d[i] = 65536;
-			for(int i = 0;i<n;i++) {
-				for(int j =1;j<=conins[i];j++) {
-					for(int k = m;k>=t[i];k--) {
-						System.out.println(d[k]+" " + d[k-t[i]]);
-						d[k] = Math.min(d[k],d[k-t[i]]+1);
+		n = sc.nextInt();
+		T = new int[n + 1];
+		Coins = new int[n + 1];
+		for (int i = 1; i <= n; i++) {
+			T[i] = sc.nextInt();
+			Coins[i] = sc.nextInt();
+		}
+		m = sc.nextInt();
+		c = new int[n + 1][m + 1];
+		hasUsed = new boolean[n + 1][m + 1];
+		for (int i = 0; i <= n; i++) {
+			c[i][0] = 0;
+		}
+		for (int j = 1; j <= m; j++) {
+			c[0][j] = MAX;
+		}
+		for (int i = 1; i <= n; i++) {
+			for (int j = 1; j <= m; j++) {
+				if (j - T[i] < 0) {
+					c[i][j] = c[i - 1][j];
+					hasUsed[i][j] = false;
+				} else if (c[i - 1][j] < 1 + c[i][j - T[i]]) {
+					c[i][j] = c[i - 1][j];
+					hasUsed[i][j] = false;
+				} else {
+					if (judge(i, j)) {
+						c[i][j] = 1 + c[i][j - T[i]];
+						hasUsed[i][j] = true;
+					} else {
+						c[i][j] = c[i - 1][j];
+						hasUsed[i][j] = false;
 					}
-					for(int o = 0;o<m;o++) {
-						System.out.print(d[o]+" ");
-					}
-					System.out.println();
-					System.out.println("-----------------");
 				}
+
 			}
-			//System.out.println(d[m]);
+		}
+		if (c[n][m] >= MAX) {
+			System.out.println(-1);
+		} else {
+			System.out.println(c[n][m]);
 		}
 		sc.close();
+	}
+
+	private static boolean judge(int i, int j) {
+		int sum = 1;
+		j -= T[i];
+		while (j >= 1) {
+			if (hasUsed[i][j]) {
+				sum++;
+			}
+			j -= T[i];
+		}
+		if (sum > Coins[i]) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 }
