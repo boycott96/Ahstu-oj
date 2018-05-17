@@ -8,27 +8,13 @@ public class J1078 {
 		while (cn.hasNext()) {
 			int n = cn.nextInt();
 			if (n == 0)
-				return;
-			int z = 0;
-			if (n == 3) {
-				z++;
-				System.out.println(z);
-			} else {
-				if (n % 2 != 0) {
-					n--;
-					while (n > 3) {
-						n /= 2;
-						z++;
-					}
-					System.out.println(z);
-				} else {
-					while (n >= 3) {
-						n /= 2;
-						z++;
-					}
-					System.out.println(z);
-				}
-			}
+				break;
+			System.out.println(Odd(n));
 		}
+		cn.close();
+	}
+
+	private static int Odd(int n) {
+		return n == 1 ? 0 : 1 + Odd(n % 3 == 0 ? n / 3 : n / 3 + 1);
 	}
 }

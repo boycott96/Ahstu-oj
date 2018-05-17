@@ -16,8 +16,7 @@ public class J {
         for (int i = 0; i < n; i++) {
             a[i] = sc.nextInt();
         }
-        System.out.println(HuffmanMax(a));
-        System.out.println(HuffmanMin(k, a));
+        System.out.println(HuffmanMax(a)+" "+HuffmanMin(k, a));
         sc.close();
     }
      

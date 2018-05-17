@@ -2,8 +2,16 @@ package cn.Javaweb.cc;
 
 import java.util.Scanner;
 
+/**
+ * 
+ * @author SunRuiGuang
+ *
+ */
 public class I {
+	// 在这里需要注意，最大值最好不要使用Integer.MAX_VALUE.
+	// 因为在值进行加 1时，很容易overflow 变成负值，可以设置为Integer.MAX_VALUE - 1.
 	private static final int MAX = 1000000;
+
 	private static int n;
 	private static int m;
 	private static int[] T;
@@ -31,6 +39,10 @@ public class I {
 		}
 		for (int i = 1; i <= n; i++) {
 			for (int j = 1; j <= m; j++) {
+				/**
+				 * 判断是否可以进行找零，如果不可以，并将该枚硬币对应的boolean置为false. 如果可以进行动态规划找零， 就置为true.
+				 * 
+				 */
 				if (j - T[i] < 0) {
 					c[i][j] = c[i - 1][j];
 					hasUsed[i][j] = false;
@@ -49,6 +61,9 @@ public class I {
 
 			}
 		}
+		/**
+		 * 
+		 */
 		if (c[n][m] >= MAX) {
 			System.out.println(-1);
 		} else {
@@ -57,6 +72,15 @@ public class I {
 		sc.close();
 	}
 
+	/**
+	 * Used judge coin amounts overflow.
+	 * 
+	 * @param i
+	 *            point coin amounts array.
+	 * @param j
+	 *            count coin amounts.
+	 * @return boolean
+	 */
 	private static boolean judge(int i, int j) {
 		int sum = 1;
 		j -= T[i];

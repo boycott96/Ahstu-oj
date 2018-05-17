@@ -10,7 +10,7 @@ public class G {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		String str = sc.nextLine();
-		String regex = " |\\;|\\.|\\?";
+		String regex = "[^a-zA-Z]";
 		String[] data = str.split(regex);
 		for(int i = 0;i<data.length;i++) {
 			if(data[i].equals(""))
