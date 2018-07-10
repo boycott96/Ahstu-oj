@@ -12,6 +12,7 @@ public class J1043 {
 		Scanner sc = new Scanner(System.in);
 		int m = sc.nextInt();
 		System.out.println(String.format("%.6f", subtraction(m)));
+		sc.close();
 	}
 
 	public static Double subtraction(int m) {

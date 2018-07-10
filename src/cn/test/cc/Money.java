@@ -9,7 +9,7 @@ public class Money {
 		Scanner sc = new Scanner(System.in);
 		try {
 			double money = sc.nextDouble();
-			if (money < 0)
+			if (money < 0) 
 				System.out.println("输入不规范，请重新输入");
 			else {
 				BigDecimal numberOfMoney = new BigDecimal(money);
@@ -19,6 +19,7 @@ public class Money {
 		} catch (Exception e) {
 			System.out.println("输入不规范，请重新输入");
 		}
+		sc.close();
 	}
 
 	private static final String[] CN_UPPER_NUMBER = { "零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖" };
